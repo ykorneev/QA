@@ -57,7 +57,7 @@
 				"header": [
 					{
 						"key": "Token",
-						"value": "123412341234",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -105,7 +105,7 @@
 				"header": [
 					{
 						"key": "api-token",
-						"value": "e123eboy123e123r123",
+						"value": "{{api-token}}",
 						"type": "text"
 					}
 				],
