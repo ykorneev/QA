@@ -8,6 +8,27 @@
 	"item": [
 		{
 			"name": "Simple GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"var msg = data.msg;",
+							"var txt = data.text;",
+							"",
+							"pm.test(\"message to be congrads\", function () {",
+							"    pm.expect(msg).to.equal(\"Поздравляем! Вы успешно прошли задание!\");",
+							"});",
+							"",
+							"pm.test(\"text to be custom\", function () {",
+							"    pm.expect(txt).to.equal(\"We'll show how to use customer panel to manage and order subscriptions by end users. You can choose subscription from the list of services, tune needed resources for that subscription and purchase it. After purchase the subscription will be automatically provisioned.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"followOriginalHttpMethod": false
 			},
