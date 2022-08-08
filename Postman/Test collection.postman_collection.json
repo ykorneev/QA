@@ -16,6 +16,7 @@
 							"var data = pm.response.json();",
 							"var msg = data.msg;",
 							"var txt = data.text;",
+							"postman.setEnvironmentVariable(\"msg_Get\", msg);",
 							"",
 							"pm.test(\"message to be congrads\", function () {",
 							"    pm.expect(msg).to.equal(\"Поздравляем! Вы успешно прошли задание!\");",
@@ -52,6 +53,29 @@
 		},
 		{
 			"name": "Post with token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"var msg = data.msg;",
+							"postman.setEnvironmentVariable(\"msg_Post\", msg);",
+							"",
+							"pm.test(\"message to be cong\", function () {",
+							"    pm.expect(msg).to.equal(\"Задание 2 успешно выполнено.\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"post msg != get msg\", function () {",
+							"   pm.expect(msg).not.equal(environment.msg_Get);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -79,6 +103,27 @@
 		},
 		{
 			"name": "Simple patch",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"var msg = data.msg;",
+							"var txt = data.text;",
+							"",
+							"pm.test(\"message error\", function () {",
+							"    pm.expect(msg).to.equal(\"Ошибка при обновлении пользователя\");",
+							"});",
+							"",
+							"pm.test(\"patch msg != post msg\", function () {",
+							"   pm.expect(msg).not.equal(environment.msg_Post);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PATCH",
 				"header": [],
@@ -100,6 +145,21 @@
 		},
 		{
 			"name": "Delete with token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [
