@@ -118,7 +118,13 @@
 							"",
 							"pm.test(\"patch msg != post msg\", function () {",
 							"   pm.expect(msg).not.equal(environment.msg_Post);",
-							"});"
+							"});",
+							"",
+							"",
+							"pm.test(\"text is not null\", function () {",
+							"   pm.expect(txt).to.be.not.null;",
+							"});",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -154,7 +160,9 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							""
+							"pm.test(\"Response code is not 500\", function () {",
+							"   pm.expect(pm.response.code).not.eql(500);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
