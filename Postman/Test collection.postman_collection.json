@@ -24,6 +24,11 @@
 							"",
 							"pm.test(\"text to be custom\", function () {",
 							"    pm.expect(txt).to.equal(\"We'll show how to use customer panel to manage and order subscriptions by end users. You can choose subscription from the list of services, tune needed resources for that subscription and purchase it. After purchase the subscription will be automatically provisioned.\");",
+							"});",
+							"",
+							"pm.test(\"Text get != text post && text get != text patch \", function () {",
+							"    pm.expect(txt).not.eql(environment.txt_Post);",
+							"    pm.expect(txt).not.eql(environment.txt_Patch);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -60,17 +65,26 @@
 						"exec": [
 							"var data = pm.response.json();",
 							"var msg = data.msg;",
+							"var txt = data.text;",
 							"postman.setEnvironmentVariable(\"msg_Post\", msg);",
+							"postman.setEnvironmentVariable(\"txt_Post\", txt);",
 							"",
 							"pm.test(\"message to be cong\", function () {",
 							"    pm.expect(msg).to.equal(\"Задание 2 успешно выполнено.\");",
 							"});",
 							"",
-							"",
 							"pm.test(\"post msg != get msg\", function () {",
 							"   pm.expect(msg).not.equal(environment.msg_Get);",
 							"});",
-							""
+							"",
+							"pm.test(\"Response time is less than 5000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+							"});",
+							"",
+							"pm.test(\"responce is not 500 && responce >100ms \", function () {",
+							"    pm.response.to.have.not.status(500);",
+							"    pm.expect(pm.response.responseTime).to.be.not.below(100);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -111,6 +125,7 @@
 							"var data = pm.response.json();",
 							"var msg = data.msg;",
 							"var txt = data.text;",
+							"postman.setEnvironmentVariable(\"txt_Patch\", txt);",
 							"",
 							"pm.test(\"message error\", function () {",
 							"    pm.expect(msg).to.equal(\"Ошибка при обновлении пользователя\");",
@@ -120,11 +135,9 @@
 							"   pm.expect(msg).not.equal(environment.msg_Post);",
 							"});",
 							"",
-							"",
 							"pm.test(\"text is not null\", function () {",
 							"   pm.expect(txt).to.be.not.null;",
-							"});",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -162,6 +175,14 @@
 							"",
 							"pm.test(\"Response code is not 500\", function () {",
 							"   pm.expect(pm.response.code).not.eql(500);",
+							"});",
+							"",
+							"pm.test(\"variable != 5 && != 15\", function () {",
+							"    pm.expect(environment.test_variable).to.be.not.oneOf([5,15]);",
+							"});",
+							"",
+							"pm.test(\"test_txt != message post && != message get\", function () {",
+							"    pm.expect(environment.test_txt).to.be.not.oneOf([environment.msg_Post,environment.msg_Get]);",
 							"});"
 						],
 						"type": "text/javascript"
