@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "295d28b1-f3d6-4d27-b76a-cd1c78892a10",
+		"name": "RapidAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19497099"
+	},
+	"item": [
+		{
+			"name": "GetToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"var accesstoken = data.access_token;",
+							"postman.setEnvironmentVariable(\"accesstoken_value\", accesstoken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-RapidAPI-Key",
+						"value": "435fbfa48amshe36ef2a19558c6ap1d3514jsn43910c785651",
+						"type": "text"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-RapidAPI-Host",
+						"value": "bravenewcoin.p.rapidapi.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"audience\": \"https://api.bravenewcoin.com\",\n    \"client_id\": \"oCdQoZoI96ERE9HY3sQ7JmbACfBf55RY\",\n    \"grant_type\": \"client_credentials\"\n}"
+				},
+				"url": {
+					"raw": "https://bravenewcoin.p.rapidapi.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"bravenewcoin",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AssetTicket",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-RapidAPI-Key",
+						"value": "435fbfa48amshe36ef2a19558c6ap1d3514jsn43910c785651",
+						"type": "text"
+					},
+					{
+						"key": "X-RapidAPI-Host",
+						"value": "bravenewcoin.p.rapidapi.com",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accesstoken_value}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://bravenewcoin.p.rapidapi.com/market-cap?X-RapidAPI-Key=435fbfa48amshe36ef2a19558c6ap1d3514jsn43910c785651&X-RapidAPI-Host=bravenewcoin.p.rapidapi.com",
+					"protocol": "https",
+					"host": [
+						"bravenewcoin",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"market-cap"
+					],
+					"query": [
+						{
+							"key": "X-RapidAPI-Key",
+							"value": "435fbfa48amshe36ef2a19558c6ap1d3514jsn43910c785651"
+						},
+						{
+							"key": "X-RapidAPI-Host",
+							"value": "bravenewcoin.p.rapidapi.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "accesstoken_value",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
